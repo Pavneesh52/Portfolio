@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-function LayersIcon(props: any) {
+function LayersIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <polygon points="12 2 2 7 12 12 22 7 12 2"/>
@@ -12,7 +12,7 @@ function LayersIcon(props: any) {
   );
 }
 
-function ServerIcon(props: any) {
+function ServerIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
@@ -23,7 +23,7 @@ function ServerIcon(props: any) {
   );
 }
 
-function RocketIcon(props: any) {
+function RocketIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
@@ -34,7 +34,7 @@ function RocketIcon(props: any) {
   );
 }
 
-function MonitorIcon(props: any) {
+function MonitorIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <rect width="20" height="14" x="2" y="3" rx="2"/>
