@@ -31,19 +31,19 @@ export default function Navbar() {
       {/* Right Actions */}
       <div className="flex items-center gap-5">
         <a
-          href="/resume.pdf"
+          href="/Resume.pdf"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="hidden md:flex items-center gap-2 px-5 py-2 bg-white/10 hover:bg-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] border border-white/5 rounded-full text-[13px] font-medium text-white transition-all duration-300 backdrop-blur-md"
         >
           <FileText className="w-4 h-4" />
           <span>Resume</span>
         </a>
         <div className="flex items-center gap-4 text-gray-400">
-          <a href="https://github.com/" target="_blank" rel="noreferrer" className="hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.6)] transition-all duration-300">
+          <a href="https://github.com/Pavneesh52" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.6)] transition-all duration-300">
             <Github className="w-[18px] h-[18px]" />
           </a>
-          <a href="https://linkedin.com/" target="_blank" rel="noreferrer" className="hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.6)] transition-all duration-300">
+          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.6)] transition-all duration-300">
             <Linkedin className="w-[18px] h-[18px]" />
           </a>
         </div>
