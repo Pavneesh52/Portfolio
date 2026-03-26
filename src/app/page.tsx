@@ -2,6 +2,7 @@ import ScrollyCanvas from '@/components/ScrollyCanvas';
 import Overlay from '@/components/Overlay';
 import Projects from '@/components/Projects';
 import Arsenal from '@/components/Arsenal';
+import Work from '@/components/Work';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Contact from '@/components/Contact';
@@ -15,6 +16,7 @@ export default function Home() {
       </div>
       <Projects />
       <Arsenal />
+      <Work />
       <About />
       <Experience />
       <Contact />
