@@ -69,7 +69,7 @@ export default function Contact() {
       } else {
         alert("Something went wrong. Please try again.");
       }
-    } catch (err) {
+    } catch {
       alert("Error sending message. Please check your connection.");
     }
     
