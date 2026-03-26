@@ -159,7 +159,7 @@ export default function Contact() {
               </button>
 
               <h3 className="text-3xl md:text-4xl font-light text-white mb-2 tracking-tight">Send a <span className="font-bold">Message</span></h3>
-              <p className="text-gray-400 text-sm mb-8 font-light">I'll normally respond within 24 hours.</p>
+              <p className="text-gray-400 text-sm mb-8 font-light">I&apos;ll normally respond within 24 hours.</p>
 
               {isSuccess ? (
                 <motion.div 
@@ -170,7 +170,7 @@ export default function Contact() {
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-3 tracking-tight">Message Sent!</h4>
-                  <p className="text-gray-400 text-base font-light">Thank you for reaching out. I've received your email.</p>
+                  <p className="text-gray-400 text-base font-light">Thank you for reaching out. I&apos;ve received your email.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-6">
