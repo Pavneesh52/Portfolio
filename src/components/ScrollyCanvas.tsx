@@ -12,7 +12,7 @@ export default function ScrollyCanvas() {
   });
 
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const FRAME_COUNT = 120; // frame_000 to frame_119
+  const FRAME_COUNT = 80; // frame_000 to frame_114
 
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];

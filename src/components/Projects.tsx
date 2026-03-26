@@ -73,7 +73,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="work" className="relative z-20 bg-[#121212] py-32 md:py-48 px-6 md:px-12 text-white">
+    <section id="services" className="relative z-20 bg-[#121212] py-32 md:py-48 px-6 md:px-12 text-white">
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         {/* Header */}
         <motion.div 

@@ -9,17 +9,23 @@ export default function Overlay() {
     target: containerRef,
     offset: ['start start', 'end end']
   });
-  // Section 1: Disappears immediately when you start scrolling (0% to 5%)
-  const opacity1 = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
-  const y1 = useTransform(scrollYProgress, [0, 0.05], [0, -100]);
+  // =============================================================
+  // Compressed distribution: 3 sections within 0.0 → 0.60 scroll
+  // Section 1 shorter, Sections 2 & 3 equal. Zero overlap.
+  // All opacities explicitly pinned to 0 at scroll end (1.0)
+  // =============================================================
 
-  // Section 2: Fades in starting at 5% and moves up to disappear around 25%
-  const opacity2 = useTransform(scrollYProgress, [0.05, 0.15, 0.25], [0, 1, 0]);
-  const y2 = useTransform(scrollYProgress, [0.05, 0.25], [100, -100]);
+  // Section 1: 0.00 → 0.15  (hold 0→0.10, fade out 0.10→0.15, stays hidden)
+  const opacity1 = useTransform(scrollYProgress, [0, 0.10, 0.15, 0.16, 1.0], [1, 1, 0, 0, 0]);
+  const y1 = useTransform(scrollYProgress, [0, 0.15], [0, -60]);
 
-  // Section 3: Fades in starting at 25% and disappears around 45%
-  const opacity3 = useTransform(scrollYProgress, [0.25, 0.35, 0.45], [0, 1, 0]);
-  const y3 = useTransform(scrollYProgress, [0.25, 0.45], [100, -100]);
+  // Section 2: 0.16 → 0.38  (fade in 0.16→0.20, hold 0.20→0.33, fade out 0.33→0.38, stays hidden)
+  const opacity2 = useTransform(scrollYProgress, [0.15, 0.16, 0.20, 0.33, 0.38, 0.39, 1.0], [0, 0, 1, 1, 0, 0, 0]);
+  const y2 = useTransform(scrollYProgress, [0.16, 0.38], [60, -60]);
+
+  // Section 3: 0.39 → 0.60  (fade in 0.39→0.43, hold 0.43→0.55, fade out 0.55→0.60, stays hidden)
+  const opacity3 = useTransform(scrollYProgress, [0.38, 0.39, 0.43, 0.55, 0.60, 0.61, 1.0], [0, 0, 1, 1, 0, 0, 0]);
+  const y3 = useTransform(scrollYProgress, [0.39, 0.60], [60, -60]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-10 pointer-events-none">
@@ -44,7 +50,7 @@ export default function Overlay() {
           className="absolute left-8 md:left-24 max-w-xl"
         >
           <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-white leading-tight drop-shadow-md">
-            I build digital experiences.
+            Building Digital Experiences.
           </h2>
         </motion.div>
 
