@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 
 const techStack = [
   { name: 'Express', icon: <span className="text-gray-300 font-mono font-bold tracking-tighter text-sm">ex</span> },
@@ -16,8 +16,70 @@ const techStack = [
 ];
 
 export default function Arsenal() {
-  // 4 identical loops to ensure large un-tearing marquee spacing
-  const list = [...techStack, ...techStack, ...techStack, ...techStack];
+  // Multiply array to ensure extremely long continuous scroll width
+  const list = [...techStack, ...techStack, ...techStack, ...techStack, ...techStack, ...techStack, ...techStack, ...techStack];
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInteracting = useRef(false);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftStart = useRef(0);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+
+    const playMarquee = () => {
+      // Auto move by 1px every frame when not being actively grabbed/hovered
+      if (!isInteracting.current && container) {
+        container.scrollLeft += 1;
+        
+        // Mathematically flawless looping block
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft -= container.scrollWidth / 2;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += container.scrollWidth / 2;
+        }
+      }
+      animationFrameId = requestAnimationFrame(playMarquee);
+    };
+
+    animationFrameId = requestAnimationFrame(playMarquee);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  const handleInteractionStart = () => {
+    isInteracting.current = true;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isInteracting.current = true;
+    isDragging.current = true;
+    if (containerRef.current) {
+      startX.current = e.pageX - containerRef.current.offsetLeft;
+      scrollLeftStart.current = containerRef.current.scrollLeft;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+    isInteracting.current = false;
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    isInteracting.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !containerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; // Drag speed multiplier
+    containerRef.current.scrollLeft = scrollLeftStart.current - walk;
+  };
 
   return (
     <section className="relative z-20 bg-[#0a0a0a] py-32 md:py-32 overflow-hidden border-t border-white/5">
@@ -30,28 +92,35 @@ export default function Arsenal() {
         </h2>
       </div>
 
-      <div className="relative flex overflow-hidden group">
-        <motion.div
-          className="flex whitespace-nowrap gap-6 w-max pr-6"
-          animate={{ x: ['0%', '-25%'] }}
-          transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+      <div className="relative w-full overflow-hidden py-4 group">
+        <div 
+          ref={containerRef}
+          onMouseEnter={handleInteractionStart}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleInteractionStart}
+          onTouchEnd={handleMouseUp}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          className="flex overflow-x-auto gap-6 md:gap-8 px-6 md:px-12 pb-8 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+          style={{ WebkitOverflowScrolling: 'touch' }}
         >
           {list.map((tech, i) => (
             <div 
               key={i} 
-              className="flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-[#111] hover:bg-white/10 transition-colors cursor-default"
+              className="flex items-center gap-5 px-8 py-5 md:px-10 md:py-6 rounded-full border border-white/10 bg-[#111] hover:bg-[#1a1a1a] transition-colors cursor-grab active:cursor-grabbing shadow-lg shrink-0"
             >
-              <div className="flex items-center justify-center w-6 h-6">
+              <div className="flex items-center justify-center w-8 h-8 scale-125 pointer-events-none">
                 {tech.icon}
               </div>
-              <span className="text-gray-300 font-medium tracking-wide text-sm">{tech.name}</span>
+              <span className="text-gray-200 font-medium tracking-wide text-base md:text-lg whitespace-nowrap pointer-events-none">{tech.name}</span>
             </div>
           ))}
-        </motion.div>
+        </div>
         
         {/* Gradient Masks */}
-        <div className="absolute inset-y-0 left-0 w-24 md:w-64 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 md:w-64 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-16 md:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 md:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
       </div>
     </section>
   );
